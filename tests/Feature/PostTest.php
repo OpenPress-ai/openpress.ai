@@ -65,3 +65,18 @@ test('editors can see the homepage', function () {
     $response->assertOk()
         ->assertViewIs('posts.index');
 });
+
+test('post create form is visible only to editors', function () {
+    $editor = User::factory()->create(['is_editor' => true]);
+    $nonEditor = User::factory()->create(['is_editor' => false]);
+
+    $this->actingAs($editor)->get(route('posts.create'))
+        ->assertOk()
+        ->assertViewIs('posts.create');
+
+    $this->actingAs($nonEditor)->get(route('posts.create'))
+        ->assertForbidden();
+
+    $this->get(route('posts.create'))
+        ->assertRedirect(route('login'));
+});
