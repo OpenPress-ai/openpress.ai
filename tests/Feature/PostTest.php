@@ -61,5 +61,5 @@ test('editors can see the homepage', function () {
     $response = $this->actingAs($editor)->get('/');
     
     $response->assertOk()
-        ->assertViewIs('home');
+        ->assertViewIs('posts.index');
 });
