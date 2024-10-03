@@ -22,7 +22,7 @@ test('editor can create a post', function () {
 test('non-editor cannot create a post', function () {
     $user = User::factory()->create(['is_editor' => false]);
 
-    $response = $this->actingAs($user)->post('/posts', [
+    $response = $this->actingAs($user)->postJson('/posts', [
         'title' => 'Test Post',
         'content' => 'This is a test post content.',
     ]);
@@ -75,8 +75,15 @@ test('post create form is visible only to editors', function () {
         ->assertViewIs('posts.create');
 
     $this->actingAs($nonEditor)->get(route('posts.create'))
-        ->assertForbidden();
+        ->assertRedirect(route('posts.index'));
 
     $this->get(route('posts.create'))
         ->assertRedirect(route('login'));
+});
+
+test('api returns 403 for non-editors trying to access create form', function () {
+    $nonEditor = User::factory()->create(['is_editor' => false]);
+
+    $this->actingAs($nonEditor)->getJson(route('posts.create'))
+        ->assertForbidden();
 });
