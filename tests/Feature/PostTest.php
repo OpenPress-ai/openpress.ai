@@ -87,3 +87,18 @@ test('api returns 403 for non-editors trying to access create form', function ()
     $this->actingAs($nonEditor)->getJson(route('posts.create'))
         ->assertForbidden();
 });
+
+test('non-editor is redirected when trying to create a post via HTTP', function () {
+    $user = User::factory()->create(['is_editor' => false]);
+
+    $response = $this->actingAs($user)->post('/posts', [
+        'title' => 'Test Post',
+        'content' => 'This is a test post content.',
+    ]);
+
+    $response->assertRedirect(route('posts.index'));
+    $this->assertDatabaseMissing('posts', [
+        'title' => 'Test Post',
+        'content' => 'This is a test post content.',
+    ]);
+});
