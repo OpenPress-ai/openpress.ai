@@ -15,8 +15,8 @@ class EditorMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user()->is_editor) {
-            return redirect()->route('posts.index');
+        if (!$request->user() || !$request->user()->is_editor) {
+            abort(403, 'Only editors can access this page.');
         }
 
         return $next($request);
