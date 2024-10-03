@@ -21,17 +21,6 @@ class PostController extends Controller
 
     public function create()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        if (!Auth::user()->is_editor) {
-            if (request()->expectsJson()) {
-                return response()->json(['message' => 'Only editors can access this resource.'], 403);
-            }
-            return redirect()->route('posts.index');
-        }
-
         return view('posts.create');
     }
 
