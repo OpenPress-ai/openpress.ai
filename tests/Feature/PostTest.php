@@ -11,7 +11,7 @@ test('editor can create a post', function () {
         'content' => 'This is a test post content.',
     ]);
     
-    $response->assertRedirect('/posts');
+    $response->assertRedirect(route('posts.index'));
     $this->assertDatabaseHas('posts', [
         'title' => 'Test Post',
         'content' => 'This is a test post content.',
@@ -35,7 +35,8 @@ test('non-editor cannot create a post', function () {
 });
 
 test('individual posts are visible publicly', function () {
-    $post = Post::factory()->create();
+    $user = User::factory()->create(['is_editor' => true]);
+    $post = Post::factory()->create(['user_id' => $user->id]);
     
     $response = $this->get("/posts/{$post->id}");
     
@@ -45,7 +46,8 @@ test('individual posts are visible publicly', function () {
 });
 
 test('list of all posts is visible publicly on homepage', function () {
-    $posts = Post::factory()->count(3)->create();
+    $user = User::factory()->create(['is_editor' => true]);
+    $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
     
     $response = $this->get('/');
     
