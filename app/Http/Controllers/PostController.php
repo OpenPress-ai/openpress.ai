@@ -37,6 +37,13 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        if (!Auth::user()->is_editor) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Only editors can create posts.'], 403);
+            }
+            return redirect()->route('posts.index');
+        }
+
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
