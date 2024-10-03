@@ -10,7 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <p>{{ $post->content }}</p>
-                    <p class="mt-4 text-gray-600">Posted by: {{ $post->user->name }}</p>
+                    <p class="mt-4 text-gray-600">
+                        Posted by: {{ $post->user ? $post->user->name : 'Unknown' }}
+                    </p>
                 </div>
             </div>
         </div>
