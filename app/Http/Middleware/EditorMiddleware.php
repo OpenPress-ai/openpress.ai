@@ -19,7 +19,7 @@ class EditorMiddleware
             if ($request->expectsJson()) {
                 abort(403, 'Only editors can access this resource.');
             }
-            return redirect()->route('login');
+            return redirect()->route('posts.index');
         }
 
         return $next($request);
