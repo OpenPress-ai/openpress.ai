@@ -21,6 +21,9 @@ class PostController extends Controller
 
     public function create()
     {
+        if (!Auth::user()->is_editor) {
+            abort(403, 'Only editors can access this page.');
+        }
         return view('posts.create');
     }
 
