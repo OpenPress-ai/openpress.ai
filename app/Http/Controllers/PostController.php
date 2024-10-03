@@ -21,27 +21,11 @@ class PostController extends Controller
 
     public function create()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        if (!Auth::user()->is_editor) {
-            abort(403, 'Only editors can access this page.');
-        }
-
         return view('posts.create');
     }
 
     public function store(Request $request)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        if (!Auth::user()->is_editor) {
-            abort(403, 'Only editors can create posts.');
-        }
-
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
