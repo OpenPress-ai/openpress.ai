@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create', 'store']);
+        $this->middleware('editor')->only(['create', 'store']);
+    }
+
     public function index()
     {
         $posts = Post::latest()->get();
@@ -31,13 +37,7 @@ class PostController extends Controller
             'content' => 'required',
         ]);
 
-        $user = Auth::user();
-
-        if (!$user->is_editor) {
-            abort(403, 'Only editors can create posts.');
-        }
-
-        $post = $user->posts()->create($request->only(['title', 'content']));
+        $post = Auth::user()->posts()->create($request->only(['title', 'content']));
 
         return redirect()->route('posts.index');
     }
