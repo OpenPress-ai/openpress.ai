@@ -16,7 +16,9 @@ class EditorMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->user() || !$request->user()->is_editor) {
-            abort(403, 'Only editors can access this page.');
+            return $request->expectsJson()
+                ? abort(403, 'Only editors can access this page.')
+                : redirect()->route('login');
         }
 
         return $next($request);
