@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth')->only(['create', 'store']);
-        $this->middleware('editor')->only(['create', 'store']);
-    }
-
     public function index()
     {
         $posts = Post::latest()->get();
