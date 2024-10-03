@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -16,6 +16,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('posts', PostController::class)->only(['index', 'show', 'create', 'store']);
+Route::resource('posts', PostController::class)->only(['show', 'create', 'store']);
 
 require __DIR__.'/auth.php';
