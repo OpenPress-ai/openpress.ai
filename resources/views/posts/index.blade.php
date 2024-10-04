@@ -4,7 +4,7 @@
             <div class="flex flex-col md:flex-row gap-8">
                 <!-- Welcome Card (Left Half) -->
                 <div class="md:w-1/3">
-                    <x-shad.card class="h-full">
+                    <x-shad.card>
                         <x-shad.card-header>
                             <x-shad.card-title class="text-2xl font-bold">
                                 Welcome to OpenPress
