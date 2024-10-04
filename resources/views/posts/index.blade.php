@@ -1,15 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h1 class="font-bold text-3xl text-foreground">
-                {{ __('Blog') }}
-            </h1>
-            <x-shad.button tag="a" href="{{ route('posts.create') }}">
-                Create Post
-            </x-shad.button>
-        </div>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row gap-8">
