@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', loading: false }"
-      x-init="$watch('darkMode', val => {
+    x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', loading: false }"
+    x-init="$watch('darkMode', val => {
           localStorage.setItem('darkMode', val)
           if (val) {
               document.documentElement.classList.add('dark')
@@ -9,7 +9,8 @@
               document.documentElement.classList.remove('dark')
           }
       })"
-      x-bind:class="{ 'dark': darkMode }">
+    x-bind:class="{ 'dark': darkMode }">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,8 +25,9 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="font-sans antialiased bg-background text-foreground"
-      x-data="{ 
+    x-data="{
         init() {
             this.handlePageTransition = (url) => {
                 this.loading = true;
@@ -64,7 +66,7 @@
             });
         }
       }"
-      x-on:click.capture="
+    x-on:click.capture="
         const target = $event.target.closest('a');
         if (target && target.href && target.href.startsWith(window.location.origin) && !target.hasAttribute('download')) {
             $event.preventDefault();
@@ -76,11 +78,11 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-card shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+        <header class="bg-card shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
         @endif
 
         <!-- Page Content -->
@@ -89,14 +91,13 @@
         </main>
     </div>
 
-    <x-loading-overlay />
-
     <script>
         // Check initial dark mode on page load
-        if (localStorage.getItem('darkMode') === 'true' || 
+        if (localStorage.getItem('darkMode') === 'true' ||
             (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
     </script>
 </body>
+
 </html>
