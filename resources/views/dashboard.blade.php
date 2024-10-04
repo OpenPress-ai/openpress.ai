@@ -1,17 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-foreground leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+            <x-shad.card>
+                <x-shad.card-header>
+                    <x-shad.card-title>{{ __('Welcome') }}</x-shad.card-title>
+                    <x-shad.card-description>{{ __("You're logged in!") }}</x-shad.card-description>
+                </x-shad.card-header>
+                <x-shad.card-content>
+                    <p class="text-muted-foreground">
+                        {{ __('This is your dashboard. You can customize this page to display important information or quick links.') }}
+                    </p>
+                </x-shad.card-content>
+            </x-shad.card>
         </div>
     </div>
 </x-app-layout>
