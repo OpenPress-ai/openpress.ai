@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('posts.index') }}" class="flex items-center">
-                        <x-icon-open-agents class="h-8 w-8 text-foreground dark:text-background" />
+                        <x-icon-open-agents class="h-8 w-8 text-foreground" />
                         <span class="ml-2 text-lg font-semibold text-foreground">OpenAgents</span>
                     </a>
                 </div>
