@@ -25,24 +25,50 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-background text-foreground"
-      x-data
+      x-data="{ 
+        init() {
+            this.handlePageTransition = (url) => {
+                this.loading = true;
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        document.body.innerHTML = doc.body.innerHTML;
+                        history.pushState(null, '', url);
+                        window.scrollTo(0, 0);
+                        this.initializeScripts();
+                    })
+                    .catch(error => {
+                        console.error('Error during page transition:', error);
+                        window.location.href = url;
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    });
+            };
+
+            this.initializeScripts = () => {
+                // Re-initialize any necessary scripts here
+                // For example, if you're using Alpine.js components:
+                Alpine.initTree(document.body);
+            };
+
+            window.addEventListener('popstate', () => {
+                this.handlePageTransition(window.location.href);
+            });
+        }
+      }"
       x-on:click.capture="
         const target = $event.target.closest('a');
         if (target && target.href && target.href.startsWith(window.location.origin) && !target.hasAttribute('download')) {
             $event.preventDefault();
-            loading = true;
-            fetch(target.href)
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    document.body.innerHTML = doc.body.innerHTML;
-                    history.pushState(null, '', target.href);
-                    window.scrollTo(0, 0);
-                })
-                .finally(() => {
-                    loading = false;
-                });
+            handlePageTransition(target.href);
         }
       ">
     <div class="min-h-screen">
