@@ -5,8 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('posts.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-foreground" />
+                    <a href="{{ route('posts.index') }}" class="flex items-center">
+                        <x-icon-open-agents class="h-8 w-8 text-foreground" />
+                        <span class="ml-2 text-lg font-semibold text-foreground">OpenAgents</span>
                     </a>
                 </div>
 
