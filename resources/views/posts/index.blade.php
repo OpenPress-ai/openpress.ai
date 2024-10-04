@@ -67,7 +67,7 @@
                             </x-shad.card-header>
                             <x-shad.card-content>
                                 <div class="prose dark:prose-invert">
-                                    <p class="text-foreground">{{ Str::limit($post->content, 150) }}</p>
+                                    {!! nl2br(e($post->content)) !!}
                                 </div>
                             </x-shad.card-content>
                             <x-shad.card-footer class="flex justify-between items-center">
