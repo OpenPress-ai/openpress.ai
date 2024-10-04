@@ -12,10 +12,11 @@
                         </x-shad.card-header>
                         <x-shad.card-content>
                             <p class="text-foreground mb-4">
-                                OpenPress is an open-source blogging platform built with Laravel and modern web technologies. We're creating a powerful, flexible, and user-friendly solution for content creators and developers alike.
-                            </p>
-                            <p class="text-foreground mb-4">
-                                Our mission is to provide a robust foundation for building custom blog experiences while leveraging the latest web development practices.
+                                We're building a new content management system that is:
+                                - Lightweight
+                                - Built on Laravel
+                                - Open source under CC-0
+                                - Optimized for AI
                             </p>
                         </x-shad.card-content>
                         <x-shad.card-footer>
