@@ -11,8 +11,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->get();
-        $heroPost = Post::latest()->first(); // Get the latest post for the hero card
-        return view('posts.index', compact('posts', 'heroPost'));
+        return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)
