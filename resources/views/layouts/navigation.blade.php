@@ -1,7 +1,4 @@
-<nav x-data="{ open: false, darkMode: localStorage.getItem('darkMode') === 'true' }" 
-     x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
-     x-bind:class="{ 'dark': darkMode }"
-     class="bg-background border-b border-input">
+<nav class="bg-background border-b border-input">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -73,10 +70,10 @@
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-accent-foreground hover:bg-accent focus:outline-none focus:bg-accent focus:text-accent-foreground transition duration-150 ease-in-out">
+                <button @click="$store.mobileMenu.toggle()" class="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-accent-foreground hover:bg-accent focus:outline-none focus:bg-accent focus:text-accent-foreground transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path :class="{'hidden': $store.mobileMenu.open, 'inline-flex': !$store.mobileMenu.open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'hidden': !$store.mobileMenu.open, 'inline-flex': $store.mobileMenu.open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -84,7 +81,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': $store.mobileMenu.open, 'hidden': !$store.mobileMenu.open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                 {{ __('Home') }}
