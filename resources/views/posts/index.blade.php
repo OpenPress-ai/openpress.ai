@@ -25,7 +25,10 @@
                         <x-shad.card-content>
                             <p class="text-muted-foreground">{{ Str::limit($post->content, 100) }}</p>
                         </x-shad.card-content>
-                        <x-shad.card-footer class="justify-end">
+                        <x-shad.card-footer class="justify-between">
+                            <span class="text-sm text-muted-foreground">
+                                Posted on: {{ $post->created_at->format('F j, Y') }}
+                            </span>
                             <x-shad.button tag="a" href="{{ route('posts.show', $post) }}" variant="outline" size="sm">
                                 Read More
                             </x-shad.button>
