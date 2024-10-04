@@ -23,7 +23,7 @@ class SiteController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'root_domain' => 'required|string|max:255|unique:sites',
+            'root_domain' => 'nullable|string|max:255|unique:sites|regex:/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i',
         ]);
 
         $site = Auth::user()->sites()->create($request->only(['name', 'root_domain']));
