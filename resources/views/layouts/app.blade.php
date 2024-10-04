@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }"
+      x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', loading: false }"
       x-init="$watch('darkMode', val => {
           localStorage.setItem('darkMode', val)
           if (val) {
@@ -24,7 +24,27 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-background text-foreground">
+<body class="font-sans antialiased bg-background text-foreground"
+      x-data
+      x-on:click.capture="
+        const target = $event.target.closest('a');
+        if (target && target.href && target.href.startsWith(window.location.origin) && !target.hasAttribute('download')) {
+            $event.preventDefault();
+            loading = true;
+            fetch(target.href)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    document.body.innerHTML = doc.body.innerHTML;
+                    history.pushState(null, '', target.href);
+                    window.scrollTo(0, 0);
+                })
+                .finally(() => {
+                    loading = false;
+                });
+        }
+      ">
     <div class="min-h-screen">
         @include('layouts.navigation')
 
@@ -42,6 +62,8 @@
             {{ $slot }}
         </main>
     </div>
+
+    <x-loading-overlay />
 
     <script>
         // Check initial dark mode on page load
