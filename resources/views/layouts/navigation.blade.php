@@ -36,7 +36,7 @@
                 </button>
 
                 @auth
-                <x-dropdown align="right" width="48">
+                <x-shad.dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-foreground bg-background hover:text-accent-foreground focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
@@ -49,23 +49,21 @@
                         </button>
                     </x-slot>
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                    <x-shad.dropdown-item :href="route('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-shad.dropdown-item>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+                        <x-shad.dropdown-item :href="route('logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-shad.dropdown-item>
+                    </form>
+                </x-shad.dropdown>
                 @else
                 <a href="{{ route('login') }}" class="font-semibold text-foreground hover:text-accent-foreground focus:outline focus:outline-2 focus:rounded-sm focus:outline-ring">Log in</a>
                 <a href="{{ route('register') }}" class="ml-4 font-semibold text-foreground hover:text-accent-foreground focus:outline focus:outline-2 focus:rounded-sm focus:outline-ring">Register</a>
