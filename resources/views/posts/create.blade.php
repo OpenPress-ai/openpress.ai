@@ -20,7 +20,7 @@
                             <textarea name="content" id="content" rows="5" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required></textarea>
                         </div>
                         <div class="flex items-center justify-end mt-4">
-                            <x-shad.button type="submit">
+                            <x-shad.button type="submit" variant="outline">
                                 Create Post
                             </x-shad.button>
                         </div>
