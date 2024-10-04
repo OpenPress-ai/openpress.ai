@@ -28,6 +28,7 @@
                     <span class="text-sm text-muted-foreground">
                         Posted on: {{ $post->created_at->format('F j, Y') }}
                     </span>
+                    {{-- Commented out edit and delete buttons
                     @if($post->user && $post->user->id === auth()->id())
                         <div class="space-x-2">
                             <x-shad.button tag="a" href="{{ route('posts.edit', $post) }}" variant="outline" size="sm">
@@ -42,6 +43,7 @@
                             </form>
                         </div>
                     @endif
+                    --}}
                 </x-shad.card-footer>
             </x-shad.card>
         </div>
