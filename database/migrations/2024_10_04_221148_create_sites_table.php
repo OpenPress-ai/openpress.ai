@@ -6,21 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('root_domain')->nullable();
+            $table->string('github_repo_url')->nullable();
+            $table->boolean('is_managed_by_openpress')->default(false);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('sites');
     }
