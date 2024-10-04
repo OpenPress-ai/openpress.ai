@@ -29,6 +29,10 @@
                                 <x-shad.button tag="a" href="https://laravel.com/docs" target="_blank" rel="noopener noreferrer" variant="outline" size="sm" class="w-full">
                                     Laravel Documentation
                                 </x-shad.button>
+                                <x-shad.button tag="a" href="https://twitter.com/openagentsinc" target="_blank" rel="noopener noreferrer" variant="outline" size="sm" class="w-full">
+                                    <x-icon-x class="w-4 h-4 mr-2" />
+                                    Follow us on X
+                                </x-shad.button>
                             </div>
                         </x-shad.card-footer>
                     </x-shad.card>
