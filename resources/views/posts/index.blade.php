@@ -13,11 +13,13 @@
                         <x-shad.card-content>
                             <p class="text-foreground mb-4">
                                 We're building a new content management system that is:
-                                - Lightweight
-                                - Built on Laravel
-                                - Open source under CC-0
-                                - Optimized for AI
                             </p>
+                            <ul class="list-disc pl-5 mb-4 text-foreground">
+                                <li>Lightweight</li>
+                                <li>Built on Laravel</li>
+                                <li>Open source under CC-0</li>
+                                <li>Optimized for AI</li>
+                            </ul>
                         </x-shad.card-content>
                         <x-shad.card-footer>
                             <div class="flex flex-col space-y-2">
@@ -34,7 +36,6 @@
                                 <x-shad.button tag="a" href="https://laravel.com/docs" target="_blank" rel="noopener noreferrer" variant="outline" size="sm" class="w-full">
                                     Laravel Documentation
                                 </x-shad.button>
-
                             </div>
                         </x-shad.card-footer>
                     </x-shad.card>
