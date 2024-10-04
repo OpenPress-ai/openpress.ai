@@ -1,4 +1,7 @@
-<nav x-data="{ open: false }" class="bg-background border-b border-input">
+<nav x-data="{ open: false, darkMode: localStorage.getItem('darkMode') === 'true' }" 
+     x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
+     x-bind:class="{ 'dark': darkMode }"
+     class="bg-background border-b border-input">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -25,6 +28,12 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Dark Mode Toggle -->
+                <button @click="darkMode = !darkMode" class="px-3 py-2 text-sm font-medium text-foreground hover:text-accent-foreground">
+                    <span x-show="!darkMode">🌙</span>
+                    <span x-show="darkMode">☀️</span>
+                </button>
+
                 @auth
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
