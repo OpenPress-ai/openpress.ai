@@ -21,12 +21,12 @@ class SiteController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'root_domain' => 'nullable|string|max:255|unique:sites|regex:/^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/i',
         ]);
 
-        $site = Auth::user()->sites()->create($request->only(['name', 'root_domain']));
+        $site = Auth::user()->sites()->create($validated);
 
         return redirect()->route('dashboard')->with('success', 'Site created successfully.');
     }
