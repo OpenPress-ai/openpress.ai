@@ -66,7 +66,9 @@
                                 </x-shad.card-description>
                             </x-shad.card-header>
                             <x-shad.card-content>
-                                <p class="text-foreground">{{ Str::limit($post->content, 150) }}</p>
+                                <div class="prose dark:prose-invert">
+                                    <p class="text-foreground">{{ Str::limit($post->content, 150) }}</p>
+                                </div>
                             </x-shad.card-content>
                             <x-shad.card-footer class="flex justify-between items-center">
                                 <x-shad.button tag="a" href="{{ route('posts.show', $post) }}" variant="outline" size="sm">
