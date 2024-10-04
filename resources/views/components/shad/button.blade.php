@@ -2,7 +2,7 @@
     'variant' => 'default',
     'size' => 'default',
     'type' => 'button',
-    'asChild' => false,
+    'tag' => 'button'
 ])
 
 @php
@@ -27,10 +27,10 @@ $sizes = [
 $classes = $baseClass . ' ' . $variants[$variant] . ' ' . $sizes[$size];
 @endphp
 
-@if($asChild)
-    <span {{ $attributes->merge(['class' => $classes]) }}>
+@if($tag === 'a')
+    <a {{ $attributes->merge(['class' => $classes]) }}>
         {{ $slot }}
-    </span>
+    </a>
 @else
     <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
         {{ $slot }}
