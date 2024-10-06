@@ -5,7 +5,7 @@
         "background-color": "#242A4C",
         "color": "#FFFFFF"
     },
-    "containerClasses": "h-screen fixed w-full overflow-auto",
+    "containerClasses": ["h-screen", "fixed", "w-full", "overflow-auto"],
     "blocks": [
         {
             "type": "Container",
