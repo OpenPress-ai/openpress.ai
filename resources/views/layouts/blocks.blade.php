@@ -13,9 +13,17 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Theme Styles -->
+        <style>
+            body {
+                background-color: {{ $theme['backgroundColor'] ?? '#ffffff' }};
+                color: {{ $theme['textColor'] ?? '#333333' }};
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             <main>
                 {{ $slot }}
             </main>
