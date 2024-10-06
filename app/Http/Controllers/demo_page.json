@@ -9,7 +9,8 @@
     "h-screen",
     "fixed",
     "w-full",
-    "overflow-auto"
+    "overflow-auto",
+    "uppercase"
   ],
   "blocks": [
     {
@@ -25,20 +26,12 @@
       },
       "children": [
         {
-          "type": "Headline",
-          "id": "main-headline",
-          "attributes": {
-            "level": "h1",
-            "content": "The Atlantis Port Company"
-          }
-        },
-        {
           "type": "Image",
           "id": "hero-image",
           "attributes": {
-            "src": "https://pbs.twimg.com/profile_images/1842728414039490560/OCaNf6AM_400x400.jpg",
+            "src": "images/tapc.png",
             "alt": "OpenPress Hero Image",
-            "width": 1200,
+            "width": 700,
             "height": 600
           }
         },
