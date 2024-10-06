@@ -11,14 +11,17 @@
     "w-full",
     "overflow-auto",
     "uppercase",
-    "flex flex-col justify-center items-center"
+    "flex",
+    "flex-col",
+    "justify-center",
+    "items-center"
   ],
   "blocks": [
     {
       "type": "Container",
       "id": "main-container",
       "attributes": {
-        "className": "page-container",
+        "className": "page-container flex flex-col items-center justify-center w-full h-full",
         "style": {
           "background-color": "{{theme.background-color}}",
           "color": "{{theme.color}}",
@@ -27,24 +30,35 @@
       },
       "children": [
         {
-          "type": "Image",
-          "id": "hero-image",
+          "type": "Container",
+          "id": "hero-container",
           "attributes": {
-            "src": "images/star.png",
-            "alt": "OpenPress Hero Image",
-            "width": 60,
-            "height": 600
-          }
-        },
-        {
-          "type": "Image",
-          "id": "hero-image",
-          "attributes": {
-            "src": "images/tapc.png",
-            "alt": "OpenPress Hero Image",
-            "width": 700,
-            "height": 600
-          }
+            "className": "flex flex-col items-center justify-center"
+          },
+          "children": [
+            {
+              "type": "Image",
+              "id": "star-image",
+              "attributes": {
+                "src": "images/star.png",
+                "alt": "Star",
+                "width": 60,
+                "height": 60,
+                "className": "mb-4"
+              }
+            },
+            {
+              "type": "Image",
+              "id": "logo-image",
+              "attributes": {
+                "src": "images/tapc.png",
+                "alt": "The Atlantis Port Company",
+                "width": 700,
+                "height": 600,
+                "className": "max-w-full h-auto"
+              }
+            }
+          ]
         }
       ]
     }
