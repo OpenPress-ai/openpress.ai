@@ -1,8 +1,8 @@
-<img
-    src="{{ $block['attributes']['src'] }}"
-    alt="{{ $block['attributes']['alt'] }}"
-    width="{{ $block['attributes']['width'] }}"
-    height="{{ $block['attributes']['height'] }}"
-    class="{{ $block['attributes']['className'] ?? '' }} rounded-lg object-cover"
-    loading="lazy"
->
+<div class="h-[{{ $block['attributes']['height'] }}px] w-[{{ $block['attributes']['width'] }}px] overflow-hidden">
+    <img
+        src="{{ $block['attributes']['src'] }}"
+        alt="{{ $block['attributes']['alt'] }}"
+        class="{{ $block['attributes']['className'] ?? '' }} w-full h-full rounded-lg object-cover"
+        loading="lazy"
+    >
+</div>
