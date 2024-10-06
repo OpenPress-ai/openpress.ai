@@ -3,9 +3,7 @@
     "slug": "welcome",
     "theme": {
         "background-color": "#242A4C",
-        "color": "#FFFFFF",
-        "primary-color": "#007bff",
-        "secondary-color": "#6c757d"
+        "color": "#FFFFFF"
     },
     "blocks": [
         {
@@ -24,10 +22,7 @@
                     "id": "main-headline",
                     "attributes": {
                         "level": "h1",
-                        "content": "Welcome to OpenPress",
-                        "style": {
-                            "color": "{{theme.primary-color}}"
-                        }
+                        "content": "Welcome to OpenPress"
                     }
                 },
                 {
@@ -57,10 +52,7 @@
                                     "id": "feature-1-title",
                                     "attributes": {
                                         "level": "h3",
-                                        "content": "Easy to Use",
-                                        "style": {
-                                            "color": "{{theme.secondary-color}}"
-                                        }
+                                        "content": "Easy to Use"
                                     }
                                 },
                                 {
@@ -68,11 +60,7 @@
                                     "id": "feature-1-button",
                                     "attributes": {
                                         "text": "Learn More",
-                                        "url": "/features/easy-to-use",
-                                        "style": {
-                                            "background-color": "{{theme.primary-color}}",
-                                            "color": "{{theme.background-color}}"
-                                        }
+                                        "url": "/features/easy-to-use"
                                     }
                                 }
                             ]
@@ -98,10 +86,7 @@
                                     "id": "post-title",
                                     "attributes": {
                                         "level": "h2",
-                                        "content": "{{post.title}}",
-                                        "style": {
-                                            "color": "{{theme.secondary-color}}"
-                                        }
+                                        "content": "{{post.title}}"
                                     }
                                 },
                                 {
@@ -109,11 +94,7 @@
                                     "id": "read-more",
                                     "attributes": {
                                         "text": "Read More",
-                                        "url": "{{post.url}}",
-                                        "style": {
-                                            "background-color": "{{theme.primary-color}}",
-                                            "color": "{{theme.background-color}}"
-                                        }
+                                        "url": "{{post.url}}"
                                     }
                                 }
                             ]
