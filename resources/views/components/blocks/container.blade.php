@@ -2,7 +2,7 @@
 $style = '';
 if (isset($block['attributes']['style'])) {
     foreach ($block['attributes']['style'] as $property => $value) {
-        $processedValue = preg_replace_callback('/\{\{theme\.(\w+)\}\}/', function($matches) use ($theme) {
+        $processedValue = preg_replace_callback('/\{\{theme\.([a-z-]+)\}\}/', function($matches) use ($theme) {
             return $theme[$matches[1]] ?? '';
         }, $value);
         $style .= "{$property}:{$processedValue};";
