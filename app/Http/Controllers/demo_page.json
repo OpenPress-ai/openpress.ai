@@ -55,23 +55,23 @@
                 "alt": "The Atlantis Port Company",
                 "width": 700,
                 "height": 600,
-                "className": "max-w-full h-auto"
+                "className": "max-w-full h-auto mb-8"
+              }
+            },
+            {
+              "type": "Paragraph",
+              "id": "subheading-paragraph",
+              "attributes": {
+                "className": "text-center max-w-3xl",
+                "style": {
+                  "font-family": "'Berkeley Mono', monospace"
+                },
+                "content": "We are building a network state to bootstrap oceanic civilization.\n\nAutomated ports, OTEC, offshore bitcoin mining & AI data centers.\n\nAll of this has not yet been economically feasible.\n\nWe've identified the path to make it feasible."
               }
             }
           ]
         }
       ]
-    },
-    {
-      "type": "Paragraph",
-      "id": "subheading-paragraph",
-      "attributes": {
-        "className": "mt-8 text-center max-w-3xl",
-        "style": {
-          "font-family": "'Berkeley Mono', monospace"
-        },
-        "content": "We are building a network state to bootstrap oceanic civilization. Automated ports, OTEC, offshore bitcoin mining & AI data centers. All of this has not yet been economically feasible. We've identified the path to make it feasible."
-      }
     }
   ]
 }
