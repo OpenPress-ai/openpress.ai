@@ -5,6 +5,7 @@
         "background-color": "#242A4C",
         "color": "#FFFFFF"
     },
+    "containerClasses": "h-screen fixed w-full overflow-auto",
     "blocks": [
         {
             "type": "Container",
@@ -61,40 +62,6 @@
                                     "attributes": {
                                         "text": "Learn More",
                                         "url": "/features/easy-to-use"
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "QueryLoop",
-                    "id": "recent-posts",
-                    "attributes": {
-                        "postType": "post",
-                        "limit": 3,
-                        "orderBy": "date",
-                        "order": "DESC"
-                    },
-                    "children": [
-                        {
-                            "type": "Container",
-                            "id": "post-container",
-                            "children": [
-                                {
-                                    "type": "Headline",
-                                    "id": "post-title",
-                                    "attributes": {
-                                        "level": "h2",
-                                        "content": "{{post.title}}"
-                                    }
-                                },
-                                {
-                                    "type": "Button",
-                                    "id": "read-more",
-                                    "attributes": {
-                                        "text": "Read More",
-                                        "url": "{{post.url}}"
                                     }
                                 }
                             ]
