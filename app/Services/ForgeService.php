@@ -108,4 +108,17 @@ class ForgeService
             ];
         }
     }
+
+    public function getDeploymentStatus(int $siteId)
+    {
+        try {
+            $response = $this->client->get("servers/{$this->serverId}/sites/{$siteId}/deployment/status");
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            return [
+                'error' => $e->getMessage(),
+                'response' => $e->hasResponse() ? json_decode($e->getResponse()->getBody()->getContents(), true) : null,
+            ];
+        }
+    }
 }
