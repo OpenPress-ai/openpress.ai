@@ -15,7 +15,7 @@ class ForgeService
     public function __construct()
     {
         $this->apiKey = Config::get('services.forge.api_key');
-        $this->serverId = Config::get('services.forge.server_id');
+        $this->serverId = Config::get('services.forge.server_id', '848551'); // Default to 848551 if not set
         $this->client = new Client([
             'base_uri' => 'https://forge.laravel.com/api/v1/',
             'headers' => [
