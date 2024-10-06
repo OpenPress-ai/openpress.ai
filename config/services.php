@@ -28,11 +28,9 @@ return [
         'key' => env('RESEND_KEY'),
     ],
 
-    'slack' => [
-        'notifications' => [
-            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
-            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
-        ],
+    'forge' => [
+        'api_key' => env('FORGE_API_KEY'),
+        'server_id' => env('FORGE_SERVER_ID', '848551'),
     ],
 
 ];
