@@ -2,20 +2,45 @@
   "title": "The Atlantis Port Company",
   "slug": "welcome",
   "theme": {
-    "background-color": "#1E274B",
-    "color": "#FFFFFF"
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#1E274B",
+      "background": "#1E274B",
+      "text": "#FFFFFF"
+    },
+    "typography": {
+      "fontFamily": "'Berkeley Mono', monospace",
+      "fontSize": {
+        "base": "16px",
+        "h1": "2.5rem",
+        "h2": "2rem"
+      }
+    },
+    "spacing": {
+      "small": "0.5rem",
+      "medium": "1rem",
+      "large": "2rem"
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px"
+    }
   },
-  "containerClasses": [
-    "h-screen",
-    "fixed",
-    "w-full",
-    "overflow-auto",
-    "uppercase",
-    "flex",
-    "flex-col",
-    "justify-center",
-    "items-center"
-  ],
+  "styles": {
+    "global": {
+      "fontFamily": "'Berkeley Mono', monospace",
+      "letterSpacing": "0.05em"
+    },
+    "container": {
+      "padding": "2rem"
+    },
+    "heading": {
+      "fontWeight": "bold",
+      "marginBottom": "1rem"
+    }
+  },
+  "containerClasses": "h-screen fixed w-full overflow-auto uppercase flex flex-col justify-center items-center",
   "blocks": [
     {
       "type": "Container",
@@ -23,9 +48,9 @@
       "attributes": {
         "className": "page-container flex flex-col items-center justify-center w-full h-full",
         "style": {
-          "background-color": "{{theme.background-color}}",
-          "color": "{{theme.color}}",
-          "font-family": "'Berkeley Mono', monospace"
+          "backgroundColor": "{{theme.colors.background}}",
+          "color": "{{theme.colors.text}}",
+          "fontFamily": "{{theme.typography.fontFamily}}"
         }
       },
       "children": [
@@ -64,7 +89,7 @@
               "attributes": {
                 "className": "text-center max-w-3xl",
                 "style": {
-                  "font-family": "'Berkeley Mono', monospace"
+                  "fontFamily": "{{theme.typography.fontFamily}}"
                 },
                 "content": "We are building a network state to bootstrap oceanic civilization.\n\nAutomated ports, OTEC, offshore bitcoin mining & AI data centers.\n\nAll of this has not yet been economically feasible.\n\nWe've identified the path to make it feasible."
               }
