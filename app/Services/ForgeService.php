@@ -35,7 +35,10 @@ class ForgeService
 
             return json_decode($response->getBody()->getContents(), true);
         } catch (GuzzleException $e) {
-            return ['error' => $e->getMessage()];
+            return [
+                'error' => $e->getMessage(),
+                'response' => $e->hasResponse() ? json_decode($e->getResponse()->getBody()->getContents(), true) : null,
+            ];
         }
     }
 
@@ -52,7 +55,10 @@ class ForgeService
 
             return json_decode($response->getBody()->getContents(), true);
         } catch (GuzzleException $e) {
-            return ['error' => $e->getMessage()];
+            return [
+                'error' => $e->getMessage(),
+                'response' => $e->hasResponse() ? json_decode($e->getResponse()->getBody()->getContents(), true) : null,
+            ];
         }
     }
 }
