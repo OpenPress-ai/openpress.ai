@@ -64,6 +64,7 @@ export default {
         'h-screen',
         'fixed',
         'w-full',
-        'overflow-auto'
+        'overflow-auto',
+        'mb-16'  // Added the new margin class
     ]
 };
