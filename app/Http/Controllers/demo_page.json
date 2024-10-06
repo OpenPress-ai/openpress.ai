@@ -19,7 +19,8 @@
         "className": "page-container",
         "style": {
           "background-color": "{{theme.background-color}}",
-          "color": "{{theme.color}}"
+          "color": "{{theme.color}}",
+          "font-family": "'Berkeley Mono', monospace"
         }
       },
       "children": [
@@ -66,7 +67,10 @@
                   "id": "feature-1-button",
                   "attributes": {
                     "text": "Learn More",
-                    "url": "/features/easy-to-use"
+                    "url": "/features/easy-to-use",
+                    "style": {
+                      "font-family": "'Berkeley Mono', monospace"
+                    }
                   }
                 }
               ]
