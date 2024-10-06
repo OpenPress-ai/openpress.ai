@@ -60,4 +60,10 @@ export default {
 
     plugins: [forms, typography],
     darkMode: 'class',
+    safelist: [
+        'h-screen',
+        'fixed',
+        'w-full',
+        'overflow-auto'
+    ]
 };
