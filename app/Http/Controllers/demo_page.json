@@ -1,12 +1,22 @@
 {
     "title": "Welcome to OpenPress",
     "slug": "welcome",
+    "theme": {
+        "primaryColor": "#007bff",
+        "secondaryColor": "#6c757d",
+        "backgroundColor": "#ffffff",
+        "textColor": "#333333"
+    },
     "blocks": [
         {
             "type": "Container",
             "id": "main-container",
             "attributes": {
-                "className": "page-container"
+                "className": "page-container",
+                "style": {
+                    "backgroundColor": "{{theme.backgroundColor}}",
+                    "color": "{{theme.textColor}}"
+                }
             },
             "children": [
                 {
@@ -14,7 +24,10 @@
                     "id": "main-headline",
                     "attributes": {
                         "level": "h1",
-                        "content": "Welcome to OpenPress"
+                        "content": "Welcome to OpenPress",
+                        "style": {
+                            "color": "{{theme.primaryColor}}"
+                        }
                     }
                 },
                 {
@@ -44,7 +57,10 @@
                                     "id": "feature-1-title",
                                     "attributes": {
                                         "level": "h3",
-                                        "content": "Easy to Use"
+                                        "content": "Easy to Use",
+                                        "style": {
+                                            "color": "{{theme.secondaryColor}}"
+                                        }
                                     }
                                 },
                                 {
@@ -52,7 +68,11 @@
                                     "id": "feature-1-button",
                                     "attributes": {
                                         "text": "Learn More",
-                                        "url": "/features/easy-to-use"
+                                        "url": "/features/easy-to-use",
+                                        "style": {
+                                            "backgroundColor": "{{theme.primaryColor}}",
+                                            "color": "{{theme.backgroundColor}}"
+                                        }
                                     }
                                 }
                             ]
@@ -78,7 +98,10 @@
                                     "id": "post-title",
                                     "attributes": {
                                         "level": "h2",
-                                        "content": "{{post.title}}"
+                                        "content": "{{post.title}}",
+                                        "style": {
+                                            "color": "{{theme.secondaryColor}}"
+                                        }
                                     }
                                 },
                                 {
@@ -86,7 +109,11 @@
                                     "id": "read-more",
                                     "attributes": {
                                         "text": "Read More",
-                                        "url": "{{post.url}}"
+                                        "url": "{{post.url}}",
+                                        "style": {
+                                            "backgroundColor": "{{theme.primaryColor}}",
+                                            "color": "{{theme.backgroundColor}}"
+                                        }
                                     }
                                 }
                             ]
