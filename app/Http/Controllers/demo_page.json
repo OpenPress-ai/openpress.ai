@@ -10,7 +10,8 @@
     "fixed",
     "w-full",
     "overflow-auto",
-    "uppercase"
+    "uppercase",
+    "flex flex-col justify-center items-center"
   ],
   "blocks": [
     {
@@ -34,41 +35,6 @@
             "width": 700,
             "height": 600
           }
-        },
-        {
-          "type": "Grid",
-          "id": "features-grid",
-          "attributes": {
-            "columns": 3,
-            "gap": "20px"
-          },
-          "children": [
-            {
-              "type": "Container",
-              "id": "feature-1",
-              "children": [
-                {
-                  "type": "Headline",
-                  "id": "feature-1-title",
-                  "attributes": {
-                    "level": "h3",
-                    "content": "Easy to Use"
-                  }
-                },
-                {
-                  "type": "Button",
-                  "id": "feature-1-button",
-                  "attributes": {
-                    "text": "Learn More",
-                    "url": "/features/easy-to-use",
-                    "style": {
-                      "font-family": "'Berkeley Mono', monospace"
-                    }
-                  }
-                }
-              ]
-            }
-          ]
         }
       ]
     }
