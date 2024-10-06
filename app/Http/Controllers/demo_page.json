@@ -1,5 +1,5 @@
 {
-    "title": "Welcome to OpenPress",
+    "title": "The Atlantis Port Company",
     "slug": "welcome",
     "theme": {
         "background-color": "#242A4C",
@@ -23,7 +23,7 @@
                     "id": "main-headline",
                     "attributes": {
                         "level": "h1",
-                        "content": "Welcome to OpenPress"
+                        "content": "The Atlantis Port Company"
                     }
                 },
                 {
