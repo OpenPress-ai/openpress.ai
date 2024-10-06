@@ -19,6 +19,7 @@ class AttachGitHubRepoToForgeSite extends Command
 
         if (isset($result['error'])) {
             $this->error("Failed to attach repository: " . $result['error']);
+            $this->line("Response details: " . json_encode($result, JSON_PRETTY_PRINT));
         } else {
             $this->info("Repository successfully attached to the site.");
             $this->line("Site ID: " . $siteId);
