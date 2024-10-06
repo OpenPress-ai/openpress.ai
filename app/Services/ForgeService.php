@@ -63,4 +63,36 @@ class ForgeService
             ];
         }
     }
+
+    public function getDeploymentScript(int $siteId)
+    {
+        try {
+            $response = $this->client->get("servers/{$this->serverId}/sites/{$siteId}/deployment/script");
+            return $response->getBody()->getContents();
+        } catch (GuzzleException $e) {
+            return [
+                'error' => $e->getMessage(),
+                'response' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null,
+            ];
+        }
+    }
+
+    public function updateDeploymentScript(int $siteId, string $script)
+    {
+        try {
+            $response = $this->client->put("servers/{$this->serverId}/sites/{$siteId}/deployment/script", [
+                'json' => [
+                    'content' => $script,
+                    'auto_source' => false,
+                ],
+            ]);
+
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            return [
+                'error' => $e->getMessage(),
+                'response' => $e->hasResponse() ? json_decode($e->getResponse()->getBody()->getContents(), true) : null,
+            ];
+        }
+    }
 }
