@@ -52,25 +52,61 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
     },
     "theme": {
       "type": "object",
-      "description": "Theme colors for the page",
+      "description": "Theme settings for the page",
       "properties": {
-        "primaryColor": {
-          "type": "string",
-          "description": "Primary color for the page"
+        "colors": {
+          "type": "object",
+          "properties": {
+            "primary": { "type": "string" },
+            "secondary": { "type": "string" },
+            "background": { "type": "string" },
+            "text": { "type": "string" }
+          }
         },
-        "secondaryColor": {
-          "type": "string",
-          "description": "Secondary color for the page"
+        "typography": {
+          "type": "object",
+          "properties": {
+            "fontFamily": { "type": "string" },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "base": { "type": "string" },
+                "h1": { "type": "string" },
+                "h2": { "type": "string" }
+              }
+            }
+          }
         },
-        "backgroundColor": {
-          "type": "string",
-          "description": "Background color for the page"
+        "spacing": {
+          "type": "object",
+          "properties": {
+            "small": { "type": "string" },
+            "medium": { "type": "string" },
+            "large": { "type": "string" }
+          }
         },
-        "textColor": {
-          "type": "string",
-          "description": "Text color for the page"
+        "breakpoints": {
+          "type": "object",
+          "properties": {
+            "sm": { "type": "string" },
+            "md": { "type": "string" },
+            "lg": { "type": "string" }
+          }
         }
       }
+    },
+    "styles": {
+      "type": "object",
+      "description": "Global and component-specific styles",
+      "properties": {
+        "global": { "type": "object" },
+        "container": { "type": "object" },
+        "heading": { "type": "object" }
+      }
+    },
+    "containerClasses": {
+      "type": "string",
+      "description": "Classes for the main container"
     },
     "blocks": {
       "type": "array",
@@ -91,7 +127,7 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
 
 ## Theme System
 
-The new theme system allows for specifying colors at the page level, which can then be used throughout the blocks. This is done using the `theme` property in the page schema. Colors can be referenced in block attributes using the `{{theme.colorName}}` syntax.
+The new theme system allows for specifying colors, typography, spacing, and breakpoints at the page level, which can then be used throughout the blocks. This is done using the `theme` property in the page schema. Theme values can be referenced in block attributes using the `{{theme.category.property}}` syntax.
 
 ## Initial Block Types
 
@@ -104,8 +140,9 @@ The new theme system allows for specifying colors at the page level, which can t
   "attributes": {
     "className": "main-container",
     "style": {
-      "backgroundColor": "{{theme.backgroundColor}}",
-      "color": "{{theme.textColor}}"
+      "backgroundColor": "{{theme.colors.background}}",
+      "color": "{{theme.colors.text}}",
+      "fontFamily": "{{theme.typography.fontFamily}}"
     }
   },
   "children": [
@@ -123,8 +160,10 @@ The new theme system allows for specifying colors at the page level, which can t
   "attributes": {
     "level": "h1",
     "content": "Welcome to OpenPress",
+    "className": "text-4xl font-bold",
     "style": {
-      "color": "{{theme.primaryColor}}"
+      "color": "{{theme.colors.primary}}",
+      "fontSize": "{{theme.typography.fontSize.h1}}"
     }
   }
 }
@@ -139,9 +178,10 @@ The new theme system allows for specifying colors at the page level, which can t
   "attributes": {
     "text": "Click me",
     "url": "/action",
+    "className": "px-4 py-2 rounded",
     "style": {
-      "backgroundColor": "{{theme.primaryColor}}",
-      "color": "{{theme.backgroundColor}}"
+      "backgroundColor": "{{theme.colors.primary}}",
+      "color": "{{theme.colors.background}}"
     }
   }
 }
@@ -157,42 +197,26 @@ The new theme system allows for specifying colors at the page level, which can t
     "src": "/images/example.jpg",
     "alt": "Example image",
     "width": 800,
-    "height": 600
+    "height": 600,
+    "className": "max-w-full h-auto"
   }
 }
 ```
 
-### 5. Grid
+### 5. Paragraph
 
 ```json
 {
-  "type": "Grid",
-  "id": "grid-1",
+  "type": "Paragraph",
+  "id": "paragraph-1",
   "attributes": {
-    "columns": 3,
-    "gap": "20px"
-  },
-  "children": [
-    // Child blocks representing grid items go here
-  ]
-}
-```
-
-### 6. Query Loop
-
-```json
-{
-  "type": "QueryLoop",
-  "id": "query-loop-1",
-  "attributes": {
-    "postType": "post",
-    "limit": 10,
-    "orderBy": "date",
-    "order": "DESC"
-  },
-  "children": [
-    // Template blocks to be repeated for each query result
-  ]
+    "content": "This is a paragraph of text.",
+    "className": "text-base mb-4",
+    "style": {
+      "fontFamily": "{{theme.typography.fontFamily}}",
+      "fontSize": "{{theme.typography.fontSize.base}}"
+    }
+  }
 }
 ```
 
@@ -205,20 +229,55 @@ Here's an example of how these blocks can be composed into a page with the new t
   "title": "Welcome to OpenPress",
   "slug": "welcome",
   "theme": {
-    "primaryColor": "#007bff",
-    "secondaryColor": "#6c757d",
-    "backgroundColor": "#ffffff",
-    "textColor": "#333333"
+    "colors": {
+      "primary": "#007bff",
+      "secondary": "#6c757d",
+      "background": "#ffffff",
+      "text": "#333333"
+    },
+    "typography": {
+      "fontFamily": "'Arial', sans-serif",
+      "fontSize": {
+        "base": "16px",
+        "h1": "2.5rem",
+        "h2": "2rem"
+      }
+    },
+    "spacing": {
+      "small": "0.5rem",
+      "medium": "1rem",
+      "large": "2rem"
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px"
+    }
   },
+  "styles": {
+    "global": {
+      "fontFamily": "{{theme.typography.fontFamily}}",
+      "fontSize": "{{theme.typography.fontSize.base}}",
+      "lineHeight": "1.5"
+    },
+    "container": {
+      "padding": "{{theme.spacing.large}}"
+    },
+    "heading": {
+      "fontWeight": "bold",
+      "marginBottom": "{{theme.spacing.medium}}"
+    }
+  },
+  "containerClasses": "min-h-screen bg-gray-100",
   "blocks": [
     {
       "type": "Container",
       "id": "main-container",
       "attributes": {
-        "className": "page-container",
+        "className": "max-w-4xl mx-auto py-8",
         "style": {
-          "backgroundColor": "{{theme.backgroundColor}}",
-          "color": "{{theme.textColor}}"
+          "backgroundColor": "{{theme.colors.background}}",
+          "color": "{{theme.colors.text}}"
         }
       },
       "children": [
@@ -228,19 +287,19 @@ Here's an example of how these blocks can be composed into a page with the new t
           "attributes": {
             "level": "h1",
             "content": "Welcome to OpenPress",
+            "className": "text-4xl mb-4",
             "style": {
-              "color": "{{theme.primaryColor}}"
+              "color": "{{theme.colors.primary}}",
+              "fontSize": "{{theme.typography.fontSize.h1}}"
             }
           }
         },
         {
-          "type": "Image",
-          "id": "hero-image",
+          "type": "Paragraph",
+          "id": "intro-paragraph",
           "attributes": {
-            "src": "/images/hero.jpg",
-            "alt": "OpenPress Hero Image",
-            "width": 1200,
-            "height": 600
+            "content": "OpenPress is a flexible and powerful content management system.",
+            "className": "mb-6"
           }
         },
         {
@@ -249,9 +308,10 @@ Here's an example of how these blocks can be composed into a page with the new t
           "attributes": {
             "text": "Get Started",
             "url": "/get-started",
+            "className": "px-4 py-2 rounded",
             "style": {
-              "backgroundColor": "{{theme.primaryColor}}",
-              "color": "{{theme.backgroundColor}}"
+              "backgroundColor": "{{theme.colors.primary}}",
+              "color": "{{theme.colors.background}}"
             }
           }
         }
