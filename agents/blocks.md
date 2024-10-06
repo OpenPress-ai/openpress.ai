@@ -1,6 +1,6 @@
 # OpenPress Block System Specification
 
-OpenPress represents webpages as a series of Blocks, which are defined using JSON schemas. This document outlines the Block and Page schemas, along with examples of initial block types.
+OpenPress represents webpages as a series of Blocks, which are defined using JSON schemas. This document outlines the Block and Page schemas, along with examples of initial block types and the new theme system.
 
 ## Block Schema
 
@@ -50,6 +50,28 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
       "type": "string",
       "description": "The URL slug for the page"
     },
+    "theme": {
+      "type": "object",
+      "description": "Theme colors for the page",
+      "properties": {
+        "primaryColor": {
+          "type": "string",
+          "description": "Primary color for the page"
+        },
+        "secondaryColor": {
+          "type": "string",
+          "description": "Secondary color for the page"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Background color for the page"
+        },
+        "textColor": {
+          "type": "string",
+          "description": "Text color for the page"
+        }
+      }
+    },
     "blocks": {
       "type": "array",
       "items": {
@@ -67,6 +89,10 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
 }
 ```
 
+## Theme System
+
+The new theme system allows for specifying colors at the page level, which can then be used throughout the blocks. This is done using the `theme` property in the page schema. Colors can be referenced in block attributes using the `{{theme.colorName}}` syntax.
+
 ## Initial Block Types
 
 ### 1. Container
@@ -78,8 +104,8 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
   "attributes": {
     "className": "main-container",
     "style": {
-      "backgroundColor": "#f0f0f0",
-      "padding": "20px"
+      "backgroundColor": "{{theme.backgroundColor}}",
+      "color": "{{theme.textColor}}"
     }
   },
   "children": [
@@ -97,7 +123,9 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
   "attributes": {
     "level": "h1",
     "content": "Welcome to OpenPress",
-    "className": "main-title"
+    "style": {
+      "color": "{{theme.primaryColor}}"
+    }
   }
 }
 ```
@@ -111,10 +139,9 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
   "attributes": {
     "text": "Click me",
     "url": "/action",
-    "className": "cta-button",
     "style": {
-      "backgroundColor": "#007bff",
-      "color": "#ffffff"
+      "backgroundColor": "{{theme.primaryColor}}",
+      "color": "{{theme.backgroundColor}}"
     }
   }
 }
@@ -130,8 +157,7 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
     "src": "/images/example.jpg",
     "alt": "Example image",
     "width": 800,
-    "height": 600,
-    "className": "featured-image"
+    "height": 600
   }
 }
 ```
@@ -172,18 +198,28 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
 
 ## Example Page
 
-Here's an example of how these blocks can be composed into a page:
+Here's an example of how these blocks can be composed into a page with the new theme system:
 
 ```json
 {
   "title": "Welcome to OpenPress",
   "slug": "welcome",
+  "theme": {
+    "primaryColor": "#007bff",
+    "secondaryColor": "#6c757d",
+    "backgroundColor": "#ffffff",
+    "textColor": "#333333"
+  },
   "blocks": [
     {
       "type": "Container",
       "id": "main-container",
       "attributes": {
-        "className": "page-container"
+        "className": "page-container",
+        "style": {
+          "backgroundColor": "{{theme.backgroundColor}}",
+          "color": "{{theme.textColor}}"
+        }
       },
       "children": [
         {
@@ -191,7 +227,10 @@ Here's an example of how these blocks can be composed into a page:
           "id": "main-headline",
           "attributes": {
             "level": "h1",
-            "content": "Welcome to OpenPress"
+            "content": "Welcome to OpenPress",
+            "style": {
+              "color": "{{theme.primaryColor}}"
+            }
           }
         },
         {
@@ -205,71 +244,16 @@ Here's an example of how these blocks can be composed into a page:
           }
         },
         {
-          "type": "Grid",
-          "id": "features-grid",
+          "type": "Button",
+          "id": "cta-button",
           "attributes": {
-            "columns": 3,
-            "gap": "20px"
-          },
-          "children": [
-            {
-              "type": "Container",
-              "id": "feature-1",
-              "children": [
-                {
-                  "type": "Headline",
-                  "id": "feature-1-title",
-                  "attributes": {
-                    "level": "h3",
-                    "content": "Easy to Use"
-                  }
-                },
-                {
-                  "type": "Button",
-                  "id": "feature-1-button",
-                  "attributes": {
-                    "text": "Learn More",
-                    "url": "/features/easy-to-use"
-                  }
-                }
-              ]
-            },
-            // Additional feature blocks would go here
-          ]
-        },
-        {
-          "type": "QueryLoop",
-          "id": "recent-posts",
-          "attributes": {
-            "postType": "post",
-            "limit": 3,
-            "orderBy": "date",
-            "order": "DESC"
-          },
-          "children": [
-            {
-              "type": "Container",
-              "id": "post-container",
-              "children": [
-                {
-                  "type": "Headline",
-                  "id": "post-title",
-                  "attributes": {
-                    "level": "h2",
-                    "content": "{{post.title}}"
-                  }
-                },
-                {
-                  "type": "Button",
-                  "id": "read-more",
-                  "attributes": {
-                    "text": "Read More",
-                    "url": "{{post.url}}"
-                  }
-                }
-              ]
+            "text": "Get Started",
+            "url": "/get-started",
+            "style": {
+              "backgroundColor": "{{theme.primaryColor}}",
+              "color": "{{theme.backgroundColor}}"
             }
-          ]
+          }
         }
       ]
     }
@@ -277,4 +261,4 @@ Here's an example of how these blocks can be composed into a page:
 }
 ```
 
-This specification allows for flexible and extensible page composition using various block types. The OpenPress core can use Laravel Blade templating to render these blocks, while other applications could implement their own rendering logic using React or other frontend frameworks.
+This specification allows for flexible and extensible page composition using various block types with consistent theming. The OpenPress core can use Laravel Blade templating to render these blocks, while other applications could implement their own rendering logic using React or other frontend frameworks.
