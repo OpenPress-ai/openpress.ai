@@ -29,7 +29,7 @@ Route::middleware(['auth', 'editor'])->group(function () {
 
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
-// New route for ContentBlockController demo
+// Updated route for ContentBlockController demo
 Route::get('/demo', [ContentBlockController::class, 'demo'])->name('content-blocks.demo');
 
 require __DIR__ . '/auth.php';
