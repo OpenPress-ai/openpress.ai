@@ -31,7 +31,7 @@ class ContentBlockController extends Controller
                             "type" => "Image",
                             "id" => "hero-image",
                             "attributes" => [
-                                "src" => "/images/hero.jpg",
+                                "src" => "https://pbs.twimg.com/profile_images/1842728414039490560/OCaNf6AM_400x400.jpg",
                                 "alt" => "OpenPress Hero Image",
                                 "width" => 1200,
                                 "height" => 600
