@@ -42,13 +42,13 @@ class ForgeService
         }
     }
 
-    public function attachGitHubRepo(int $siteId, string $repoUrl)
+    public function attachGitHubRepo(int $siteId, string $repoName)
     {
         try {
             $response = $this->client->post("servers/{$this->serverId}/sites/{$siteId}/git", [
                 'json' => [
                     'provider' => 'github',
-                    'repository' => $repoUrl,
+                    'repository' => $repoName,
                     'branch' => 'main',
                     'composer' => true,
                     'deploy_on_push' => true,
