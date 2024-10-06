@@ -23,7 +23,7 @@
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen">
+        <div class="min-h-screen" style="background-color: {{ $theme['backgroundColor'] ?? '#ffffff' }}; color: {{ $theme['textColor'] ?? '#333333' }};">
             <main>
                 {{ $slot }}
             </main>
