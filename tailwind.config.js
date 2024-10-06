@@ -65,6 +65,7 @@ export default {
         'fixed',
         'w-full',
         'overflow-auto',
-        'mb-16'  // Added the new margin class
+        'mb-8',
+        'mb-16'
     ]
 };
