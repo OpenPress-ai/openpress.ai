@@ -50,6 +50,8 @@ class ForgeService
                     'provider' => 'github',
                     'repository' => $repoUrl,
                     'branch' => 'main',
+                    'composer' => true,
+                    'deploy_on_push' => true,
                 ],
             ]);
 
