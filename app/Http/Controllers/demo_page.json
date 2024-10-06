@@ -30,6 +30,16 @@
           "type": "Image",
           "id": "hero-image",
           "attributes": {
+            "src": "images/star.png",
+            "alt": "OpenPress Hero Image",
+            "width": 60,
+            "height": 600
+          }
+        },
+        {
+          "type": "Image",
+          "id": "hero-image",
+          "attributes": {
             "src": "images/tapc.png",
             "alt": "OpenPress Hero Image",
             "width": 700,
