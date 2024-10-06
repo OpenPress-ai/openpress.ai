@@ -10,10 +10,12 @@ class ForgeService
 {
     private $client;
     private $apiKey;
+    private $serverId;
 
     public function __construct()
     {
         $this->apiKey = Config::get('services.forge.api_key');
+        $this->serverId = Config::get('services.forge.server_id');
         $this->client = new Client([
             'base_uri' => 'https://forge.laravel.com/api/v1/',
             'headers' => [
@@ -24,19 +26,33 @@ class ForgeService
         ]);
     }
 
-    public function createSite(int $serverId, array $siteData)
+    public function createSite(array $siteData)
     {
         try {
-            $response = $this->client->post("servers/{$serverId}/sites", [
+            $response = $this->client->post("servers/{$this->serverId}/sites", [
                 'json' => $siteData,
             ]);
 
             return json_decode($response->getBody()->getContents(), true);
         } catch (GuzzleException $e) {
-            // Handle or log the error as needed
             return ['error' => $e->getMessage()];
         }
     }
 
-    // You can add more methods for other Forge API endpoints as needed
+    public function attachGitHubRepo(int $siteId, string $repoUrl)
+    {
+        try {
+            $response = $this->client->post("servers/{$this->serverId}/sites/{$siteId}/git", [
+                'json' => [
+                    'provider' => 'github',
+                    'repository' => $repoUrl,
+                    'branch' => 'main',
+                ],
+            ]);
+
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
 }
