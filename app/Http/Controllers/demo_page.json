@@ -1,0 +1,77 @@
+{
+  "title": "The Atlantis Port Company",
+  "slug": "welcome",
+  "theme": {
+    "background-color": "#242A4C",
+    "color": "#FFFFFF"
+  },
+  "containerClasses": [
+    "h-screen",
+    "fixed",
+    "w-full",
+    "overflow-auto",
+    "uppercase",
+    "flex",
+    "flex-col",
+    "justify-center",
+    "items-center"
+  ],
+  "blocks": [
+    {
+      "type": "Container",
+      "id": "main-container",
+      "attributes": {
+        "className": "page-container flex flex-col items-center justify-center w-full h-full",
+        "style": {
+          "background-color": "{{theme.background-color}}",
+          "color": "{{theme.color}}",
+          "font-family": "'Berkeley Mono', monospace"
+        }
+      },
+      "children": [
+        {
+          "type": "Container",
+          "id": "hero-container",
+          "attributes": {
+            "className": "flex flex-col items-center justify-center"
+          },
+          "children": [
+            {
+              "type": "Image",
+              "id": "star-image",
+              "attributes": {
+                "src": "images/star.png",
+                "alt": "Star",
+                "width": 60,
+                "height": 60,
+                "className": "mb-4"
+              }
+            },
+            {
+              "type": "Image",
+              "id": "logo-image",
+              "attributes": {
+                "src": "images/tapc.png",
+                "alt": "The Atlantis Port Company",
+                "width": 700,
+                "height": 600,
+                "className": "max-w-full h-auto mb-8"
+              }
+            },
+            {
+              "type": "Paragraph",
+              "id": "subheading-paragraph",
+              "attributes": {
+                "className": "text-center max-w-3xl",
+                "style": {
+                  "font-family": "'Berkeley Mono', monospace"
+                },
+                "content": "We are building a network state to bootstrap oceanic civilization.\n\nAutomated ports, OTEC, offshore bitcoin mining & AI data centers.\n\nAll of this has not yet been economically feasible.\n\nWe've identified the path to make it feasible."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
