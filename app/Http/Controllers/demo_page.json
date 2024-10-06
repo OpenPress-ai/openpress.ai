@@ -2,7 +2,7 @@
   "title": "The Atlantis Port Company",
   "slug": "welcome",
   "theme": {
-    "background-color": "#242A4C",
+    "background-color": "#1E274B",
     "color": "#FFFFFF"
   },
   "containerClasses": [
