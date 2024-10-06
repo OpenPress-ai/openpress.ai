@@ -7,15 +7,15 @@ use Illuminate\Console\Command;
 
 class AttachGitHubRepoToForgeSite extends Command
 {
-    protected $signature = 'forge:attach-repo {siteId} {repoUrl}';
+    protected $signature = 'forge:attach-repo {siteId} {repoName}';
     protected $description = 'Attach a GitHub repository to a Forge site';
 
     public function handle(ForgeService $forgeService)
     {
         $siteId = $this->argument('siteId');
-        $repoUrl = $this->argument('repoUrl');
+        $repoName = $this->argument('repoName');
 
-        $result = $forgeService->attachGitHubRepo($siteId, $repoUrl);
+        $result = $forgeService->attachGitHubRepo($siteId, $repoName);
 
         if (isset($result['error'])) {
             $this->error("Failed to attach repository: " . $result['error']);
@@ -23,7 +23,7 @@ class AttachGitHubRepoToForgeSite extends Command
         } else {
             $this->info("Repository successfully attached to the site.");
             $this->line("Site ID: " . $siteId);
-            $this->line("Repository URL: " . $repoUrl);
+            $this->line("Repository: " . $repoName);
         }
     }
 }
