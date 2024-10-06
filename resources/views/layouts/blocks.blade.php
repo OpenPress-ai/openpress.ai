@@ -13,20 +13,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Theme Styles -->
-        <style>
-            body {
-                background-color: {{ $theme['background-color'] ?? '#ffffff' }};
-                color: {{ $theme['color'] ?? '#333333' }};
-            }
-        </style>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen">
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+    <body>
+        {{ $slot }}
     </body>
 </html>
