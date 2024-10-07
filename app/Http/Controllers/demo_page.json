@@ -93,6 +93,74 @@
                 },
                 "content": "We are building a network state to bootstrap oceanic civilization.\n\nAutomated ports, OTEC, offshore bitcoin mining & AI data centers.\n\nAll of this has not yet been economically feasible.\n\nWe've identified the path to make it feasible."
               }
+            },
+            {
+              "type": "Container",
+              "id": "recent-posts-container",
+              "attributes": {
+                "className": "mt-8 w-full max-w-3xl"
+              },
+              "children": [
+                {
+                  "type": "Headline",
+                  "id": "recent-posts-headline",
+                  "attributes": {
+                    "level": "h2",
+                    "content": "Recent Posts",
+                    "className": "text-2xl font-bold mb-4 text-center"
+                  }
+                },
+                {
+                  "type": "QueryLoop",
+                  "id": "recent-posts-loop",
+                  "attributes": {
+                    "query": {
+                      "post_type": "post",
+                      "posts_per_page": 3,
+                      "orderby": "date",
+                      "order": "DESC"
+                    },
+                    "template": {
+                      "type": "Container",
+                      "attributes": {
+                        "className": "mb-6 p-4 border border-white rounded"
+                      },
+                      "children": [
+                        {
+                          "type": "Headline",
+                          "attributes": {
+                            "level": "h3",
+                            "content": "{{post.title}}",
+                            "className": "text-xl font-bold mb-2"
+                          }
+                        },
+                        {
+                          "type": "Paragraph",
+                          "attributes": {
+                            "content": "{{post.excerpt}}",
+                            "className": "mb-2"
+                          }
+                        },
+                        {
+                          "type": "Paragraph",
+                          "attributes": {
+                            "content": "{{post.date}}",
+                            "className": "text-sm italic mb-2"
+                          }
+                        },
+                        {
+                          "type": "Button",
+                          "attributes": {
+                            "text": "Read More",
+                            "url": "{{post.permalink}}",
+                            "className": "px-4 py-2 bg-white text-blue-900 rounded hover:bg-blue-100"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           ]
         }
