@@ -220,6 +220,64 @@ The new theme system allows for specifying colors, typography, spacing, and brea
 }
 ```
 
+### 6. QueryLoop
+
+The QueryLoop block allows you to fetch and display a list of posts or custom post types.
+
+```json
+{
+  "type": "QueryLoop",
+  "id": "recent-posts-loop",
+  "attributes": {
+    "postType": "post",
+    "limit": 3,
+    "orderBy": "created_at",
+    "order": "DESC"
+  },
+  "children": [
+    // Template for each item in the loop
+    {
+      "type": "Container",
+      "attributes": {
+        "className": "mb-6 p-4 border border-white rounded"
+      },
+      "children": [
+        {
+          "type": "Headline",
+          "attributes": {
+            "level": "h3",
+            "content": "{{post.title}}",
+            "className": "text-xl font-bold mb-2"
+          }
+        },
+        {
+          "type": "Paragraph",
+          "attributes": {
+            "content": "{{post.excerpt}}",
+            "className": "mb-2"
+          }
+        },
+        {
+          "type": "Paragraph",
+          "attributes": {
+            "content": "{{post.created_at}}",
+            "className": "text-sm italic mb-2"
+          }
+        },
+        {
+          "type": "Button",
+          "attributes": {
+            "text": "Read More",
+            "url": "{{post.slug}}",
+            "className": "px-4 py-2 bg-white text-blue-900 rounded hover:bg-blue-100"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Example Page
 
 Here's an example of how these blocks can be composed into a page with the new theme system:
@@ -314,6 +372,56 @@ Here's an example of how these blocks can be composed into a page with the new t
               "color": "{{theme.colors.background}}"
             }
           }
+        },
+        {
+          "type": "QueryLoop",
+          "id": "recent-posts-loop",
+          "attributes": {
+            "postType": "post",
+            "limit": 3,
+            "orderBy": "created_at",
+            "order": "DESC"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "className": "mb-6 p-4 border border-gray-200 rounded"
+              },
+              "children": [
+                {
+                  "type": "Headline",
+                  "attributes": {
+                    "level": "h3",
+                    "content": "{{post.title}}",
+                    "className": "text-xl font-bold mb-2"
+                  }
+                },
+                {
+                  "type": "Paragraph",
+                  "attributes": {
+                    "content": "{{post.excerpt}}",
+                    "className": "mb-2"
+                  }
+                },
+                {
+                  "type": "Paragraph",
+                  "attributes": {
+                    "content": "{{post.created_at}}",
+                    "className": "text-sm italic mb-2"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "attributes": {
+                    "text": "Read More",
+                    "url": "{{post.slug}}",
+                    "className": "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
