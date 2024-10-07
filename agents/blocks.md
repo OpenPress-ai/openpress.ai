@@ -52,25 +52,61 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
     },
     "theme": {
       "type": "object",
-      "description": "Theme colors for the page",
+      "description": "Theme settings for the page",
       "properties": {
-        "primaryColor": {
-          "type": "string",
-          "description": "Primary color for the page"
+        "colors": {
+          "type": "object",
+          "properties": {
+            "primary": { "type": "string" },
+            "secondary": { "type": "string" },
+            "background": { "type": "string" },
+            "text": { "type": "string" }
+          }
         },
-        "secondaryColor": {
-          "type": "string",
-          "description": "Secondary color for the page"
+        "typography": {
+          "type": "object",
+          "properties": {
+            "fontFamily": { "type": "string" },
+            "fontSize": {
+              "type": "object",
+              "properties": {
+                "base": { "type": "string" },
+                "h1": { "type": "string" },
+                "h2": { "type": "string" }
+              }
+            }
+          }
         },
-        "backgroundColor": {
-          "type": "string",
-          "description": "Background color for the page"
+        "spacing": {
+          "type": "object",
+          "properties": {
+            "small": { "type": "string" },
+            "medium": { "type": "string" },
+            "large": { "type": "string" }
+          }
         },
-        "textColor": {
-          "type": "string",
-          "description": "Text color for the page"
+        "breakpoints": {
+          "type": "object",
+          "properties": {
+            "sm": { "type": "string" },
+            "md": { "type": "string" },
+            "lg": { "type": "string" }
+          }
         }
       }
+    },
+    "styles": {
+      "type": "object",
+      "description": "Global and component-specific styles",
+      "properties": {
+        "global": { "type": "object" },
+        "container": { "type": "object" },
+        "heading": { "type": "object" }
+      }
+    },
+    "containerClasses": {
+      "type": "string",
+      "description": "Classes for the main container"
     },
     "blocks": {
       "type": "array",
@@ -91,7 +127,7 @@ A Page in OpenPress is composed of multiple Blocks and is defined using the foll
 
 ## Theme System
 
-The new theme system allows for specifying colors at the page level, which can then be used throughout the blocks. This is done using the `theme` property in the page schema. Colors can be referenced in block attributes using the `{{theme.colorName}}` syntax.
+The new theme system allows for specifying colors, typography, spacing, and breakpoints at the page level, which can then be used throughout the blocks. This is done using the `theme` property in the page schema. Theme values can be referenced in block attributes using the `{{theme.category.property}}` syntax.
 
 ## Initial Block Types
 
@@ -104,8 +140,9 @@ The new theme system allows for specifying colors at the page level, which can t
   "attributes": {
     "className": "main-container",
     "style": {
-      "backgroundColor": "{{theme.backgroundColor}}",
-      "color": "{{theme.textColor}}"
+      "backgroundColor": "{{theme.colors.background}}",
+      "color": "{{theme.colors.text}}",
+      "fontFamily": "{{theme.typography.fontFamily}}"
     }
   },
   "children": [
@@ -123,8 +160,10 @@ The new theme system allows for specifying colors at the page level, which can t
   "attributes": {
     "level": "h1",
     "content": "Welcome to OpenPress",
+    "className": "text-4xl font-bold",
     "style": {
-      "color": "{{theme.primaryColor}}"
+      "color": "{{theme.colors.primary}}",
+      "fontSize": "{{theme.typography.fontSize.h1}}"
     }
   }
 }
@@ -139,9 +178,10 @@ The new theme system allows for specifying colors at the page level, which can t
   "attributes": {
     "text": "Click me",
     "url": "/action",
+    "className": "px-4 py-2 rounded",
     "style": {
-      "backgroundColor": "{{theme.primaryColor}}",
-      "color": "{{theme.backgroundColor}}"
+      "backgroundColor": "{{theme.colors.primary}}",
+      "color": "{{theme.colors.background}}"
     }
   }
 }
@@ -157,41 +197,83 @@ The new theme system allows for specifying colors at the page level, which can t
     "src": "/images/example.jpg",
     "alt": "Example image",
     "width": 800,
-    "height": 600
+    "height": 600,
+    "className": "max-w-full h-auto"
   }
 }
 ```
 
-### 5. Grid
+### 5. Paragraph
 
 ```json
 {
-  "type": "Grid",
-  "id": "grid-1",
+  "type": "Paragraph",
+  "id": "paragraph-1",
   "attributes": {
-    "columns": 3,
-    "gap": "20px"
-  },
-  "children": [
-    // Child blocks representing grid items go here
-  ]
+    "content": "This is a paragraph of text.",
+    "className": "text-base mb-4",
+    "style": {
+      "fontFamily": "{{theme.typography.fontFamily}}",
+      "fontSize": "{{theme.typography.fontSize.base}}"
+    }
+  }
 }
 ```
 
-### 6. Query Loop
+### 6. QueryLoop
+
+The QueryLoop block allows you to fetch and display a list of posts or custom post types.
 
 ```json
 {
   "type": "QueryLoop",
-  "id": "query-loop-1",
+  "id": "recent-posts-loop",
   "attributes": {
     "postType": "post",
-    "limit": 10,
-    "orderBy": "date",
+    "limit": 3,
+    "orderBy": "created_at",
     "order": "DESC"
   },
   "children": [
-    // Template blocks to be repeated for each query result
+    // Template for each item in the loop
+    {
+      "type": "Container",
+      "attributes": {
+        "className": "mb-6 p-4 border border-white rounded"
+      },
+      "children": [
+        {
+          "type": "Headline",
+          "attributes": {
+            "level": "h3",
+            "content": "{{post.title}}",
+            "className": "text-xl font-bold mb-2"
+          }
+        },
+        {
+          "type": "Paragraph",
+          "attributes": {
+            "content": "{{post.excerpt}}",
+            "className": "mb-2"
+          }
+        },
+        {
+          "type": "Paragraph",
+          "attributes": {
+            "content": "{{post.created_at}}",
+            "className": "text-sm italic mb-2"
+          }
+        },
+        {
+          "type": "Button",
+          "attributes": {
+            "text": "Read More",
+            "url": "{{post.slug}}",
+            "className": "px-4 py-2 bg-white text-blue-900 rounded hover:bg-blue-100"
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -205,20 +287,55 @@ Here's an example of how these blocks can be composed into a page with the new t
   "title": "Welcome to OpenPress",
   "slug": "welcome",
   "theme": {
-    "primaryColor": "#007bff",
-    "secondaryColor": "#6c757d",
-    "backgroundColor": "#ffffff",
-    "textColor": "#333333"
+    "colors": {
+      "primary": "#007bff",
+      "secondary": "#6c757d",
+      "background": "#ffffff",
+      "text": "#333333"
+    },
+    "typography": {
+      "fontFamily": "'Arial', sans-serif",
+      "fontSize": {
+        "base": "16px",
+        "h1": "2.5rem",
+        "h2": "2rem"
+      }
+    },
+    "spacing": {
+      "small": "0.5rem",
+      "medium": "1rem",
+      "large": "2rem"
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px"
+    }
   },
+  "styles": {
+    "global": {
+      "fontFamily": "{{theme.typography.fontFamily}}",
+      "fontSize": "{{theme.typography.fontSize.base}}",
+      "lineHeight": "1.5"
+    },
+    "container": {
+      "padding": "{{theme.spacing.large}}"
+    },
+    "heading": {
+      "fontWeight": "bold",
+      "marginBottom": "{{theme.spacing.medium}}"
+    }
+  },
+  "containerClasses": "min-h-screen bg-gray-100",
   "blocks": [
     {
       "type": "Container",
       "id": "main-container",
       "attributes": {
-        "className": "page-container",
+        "className": "max-w-4xl mx-auto py-8",
         "style": {
-          "backgroundColor": "{{theme.backgroundColor}}",
-          "color": "{{theme.textColor}}"
+          "backgroundColor": "{{theme.colors.background}}",
+          "color": "{{theme.colors.text}}"
         }
       },
       "children": [
@@ -228,19 +345,19 @@ Here's an example of how these blocks can be composed into a page with the new t
           "attributes": {
             "level": "h1",
             "content": "Welcome to OpenPress",
+            "className": "text-4xl mb-4",
             "style": {
-              "color": "{{theme.primaryColor}}"
+              "color": "{{theme.colors.primary}}",
+              "fontSize": "{{theme.typography.fontSize.h1}}"
             }
           }
         },
         {
-          "type": "Image",
-          "id": "hero-image",
+          "type": "Paragraph",
+          "id": "intro-paragraph",
           "attributes": {
-            "src": "/images/hero.jpg",
-            "alt": "OpenPress Hero Image",
-            "width": 1200,
-            "height": 600
+            "content": "OpenPress is a flexible and powerful content management system.",
+            "className": "mb-6"
           }
         },
         {
@@ -249,11 +366,62 @@ Here's an example of how these blocks can be composed into a page with the new t
           "attributes": {
             "text": "Get Started",
             "url": "/get-started",
+            "className": "px-4 py-2 rounded",
             "style": {
-              "backgroundColor": "{{theme.primaryColor}}",
-              "color": "{{theme.backgroundColor}}"
+              "backgroundColor": "{{theme.colors.primary}}",
+              "color": "{{theme.colors.background}}"
             }
           }
+        },
+        {
+          "type": "QueryLoop",
+          "id": "recent-posts-loop",
+          "attributes": {
+            "postType": "post",
+            "limit": 3,
+            "orderBy": "created_at",
+            "order": "DESC"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "className": "mb-6 p-4 border border-gray-200 rounded"
+              },
+              "children": [
+                {
+                  "type": "Headline",
+                  "attributes": {
+                    "level": "h3",
+                    "content": "{{post.title}}",
+                    "className": "text-xl font-bold mb-2"
+                  }
+                },
+                {
+                  "type": "Paragraph",
+                  "attributes": {
+                    "content": "{{post.excerpt}}",
+                    "className": "mb-2"
+                  }
+                },
+                {
+                  "type": "Paragraph",
+                  "attributes": {
+                    "content": "{{post.created_at}}",
+                    "className": "text-sm italic mb-2"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "attributes": {
+                    "text": "Read More",
+                    "url": "{{post.slug}}",
+                    "className": "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
