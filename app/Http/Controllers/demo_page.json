@@ -114,13 +114,13 @@
                   "type": "QueryLoop",
                   "id": "recent-posts-loop",
                   "attributes": {
-                    "query": {
-                      "post_type": "post",
-                      "posts_per_page": 3,
-                      "orderby": "date",
-                      "order": "DESC"
-                    },
-                    "template": {
+                    "postType": "post",
+                    "limit": 3,
+                    "orderBy": "created_at",
+                    "order": "DESC"
+                  },
+                  "children": [
+                    {
                       "type": "Container",
                       "attributes": {
                         "className": "mb-6 p-4 border border-white rounded"
@@ -144,7 +144,7 @@
                         {
                           "type": "Paragraph",
                           "attributes": {
-                            "content": "{{post.date}}",
+                            "content": "{{post.created_at}}",
                             "className": "text-sm italic mb-2"
                           }
                         },
@@ -152,13 +152,13 @@
                           "type": "Button",
                           "attributes": {
                             "text": "Read More",
-                            "url": "{{post.permalink}}",
+                            "url": "{{post.slug}}",
                             "className": "px-4 py-2 bg-white text-blue-900 rounded hover:bg-blue-100"
                           }
                         }
                       ]
                     }
-                  }
+                  ]
                 }
               ]
             }
